@@ -11,7 +11,7 @@
                     <a class="nav-link" href="#">Inicia seccion</a>
                 </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Reserva</a>
+                <a class="nav-link" href="{{ route('topbar.Reserva') }}">Reserva</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">Caja</a>
