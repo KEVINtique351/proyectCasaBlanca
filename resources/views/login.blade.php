@@ -2,7 +2,8 @@
 @section('content')
 @if(session('success'))
     <h1>{{session('success')}}</h1>
-@endif                
+@endif   
+             
 <main class="login-form">
     <div class="cotainer">
         <div class="row justify-content-center">
