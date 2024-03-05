@@ -22,9 +22,9 @@
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Configuraciones</a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="/salones">Salones</a></li>
-                  <li><a class="dropdown-item" href="/servicios">Servicios de comida y bebida</a></li>
-                  <li><a class="dropdown-item" href="/otroServicio">Otros servicios</a></li>
+                  <li><a class="dropdown-item" href="{{ route('salones.index') }}">Salones</a></li>
+                  <li><a class="dropdown-item" href="{{ route('ser.servicio') }}">Servicios de comida y bebida</a></li>
+                  <li><a class="dropdown-item" href="{{ route('otros.OtroServicios') }}">Otros servicios</a></li>
                 </ul>
               </li>
             </ul>
