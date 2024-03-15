@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\topbar\AuthController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SalonesController;
 use App\Http\Controllers\ServiController;
 use App\Http\Controllers\ServiciosOtrosController;
