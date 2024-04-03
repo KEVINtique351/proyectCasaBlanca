@@ -16,9 +16,50 @@ body {
         left: 0;
         background: #2ecc71;
         /* IE Fallback */
-        background: rgba(46, 204, 113, .8);
+        background: rgba(46, 204, 112, 0.452);
         width: 100%;
         height: 100%;
     }
+
+    
 }
 
+.contenedor {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    height: 100vh; /* Establece la altura del contenedor al 100% de la altura de la ventana */
+}
+
+.contenedor-app {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    
+    height: 100vh; /* Establece la altura del contenedor al 100% de la altura de la ventana */
+}
+
+/*
+    diseño del login
+*/
+.card-login{
+    width: 20em;
+    border-radius: 15px; /* Bordes redondeados de la tarjeta */
+    box-shadow: 0 4px 8px rgba(36, 2, 2, 0.836); 
+}
+
+/**
+ diseño de servicio
+*/
+.card-service{
+    width: 100vh;
+    height: 80vh;
+    border-radius: 15px; /* Bordes redondeados de la tarjeta */
+    box-shadow: 0 4px 8px rgba(36, 2, 2, 0.836); 
+}
+
+.card-cliente{
+    width: 200vh;
+    height: 120vh;
+    border-radius: 15px; /* Bordes redondeados de la tarjeta */
+    box-shadow: 0 4px 8px rgba(36, 2, 2, 0.836); 
+}

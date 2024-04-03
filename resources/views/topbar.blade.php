@@ -8,7 +8,7 @@
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Inicia seccion</a>
+                    <a class="nav-link" href="{{ route('logout') }}">Cerrar seccion</a>
                 </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{ route('topbar.Reserva') }}">Reserva</a>
@@ -16,12 +16,11 @@
               <li class="nav-item">
                 <a class="nav-link" href="#">Caja</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Contacto</a>
-              </li>
+              
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Configuraciones</a>
                 <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="{{ route('clientes') }}">Clientes</a></li>
                   <li><a class="dropdown-item" href="{{ route('salones.index') }}">Salones</a></li>
                   <li><a class="dropdown-item" href="{{ route('ser.servicio') }}">Servicios de comida y bebida</a></li>
                   <li><a class="dropdown-item" href="{{ route('otros.OtroServicios') }}">Otros servicios</a></li>

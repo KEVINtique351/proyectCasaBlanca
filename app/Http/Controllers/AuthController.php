@@ -60,4 +60,13 @@ class AuthController extends Controller
 	
 	    return redirect("/")->withSuccess('No tienes acceso, por favor inicia sesión');
     }
+
+	public function logout()
+    {
+        // Cerramos la sesión del usuario
+        Auth::logout();
+
+        // Redirigimos al usuario a la página de inicio con un mensaje de éxito
+		return view('login');
+    }
 }
