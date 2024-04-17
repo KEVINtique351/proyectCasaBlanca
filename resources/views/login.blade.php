@@ -9,7 +9,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card card-login">
-                    <h3 class="card-header text-center">Casa Blancan</h3>
+                    <h3 class="card-header text-center">Casa Real</h3>
                     <div class="card-body">
                         <form method="POST" action="{{route('login') }}">
                             @csrf

@@ -30,11 +30,22 @@ class OrdenAppService implements IOrdenAppService{
         return $this->repository->find($id);
     }
 
-    public function findByNumeroOrden($nombre){
-        return $this->repository->findByNumeroOrden($nombre);
+    public function findByNumeroOrden($numeroOrden){
+        $ordenServicio= $this->repository->findByNumeroOrden($numeroOrden);
+        $ordenSalon=$this->findByNumeroOrdenSalon($numeroOrden);
+        $ordenServicios=$this->findByNumeroOrdenServicios($numeroOrden);
+        $ordenOtrosServicios=$this->findByNumeroOrdenOtrosServicios($numeroOrden);
+
+        $datos= [
+            "ordenServicio"=>$ordenServicio,
+            "detalle"=>[
+                "detalleSalon"=>$ordenSalon,
+                "detalleServicios"=>$ordenServicios,
+                "detalleOtroServicios"=>$ordenOtrosServicios,
+            ]
+        ];
+        return $datos;
     }
-
-
 
     public function guardar($data){
         try {
@@ -48,7 +59,7 @@ class OrdenAppService implements IOrdenAppService{
                 "iva"=>$data['iva'],
                 "impuestoConsumo"=>$data['impuestoConsumo'],
                 "total"=>$data['total'],
-                "estado"=>"1",
+                "estado"=>$data['estado'],
             ];
             $orden= $this->repository->create($datos);
             if($orden->id>0){
@@ -65,6 +76,7 @@ class OrdenAppService implements IOrdenAppService{
     }
     public function actualizar($id,$data){
         try {
+           
             $datos= array([
                 "numeroOrden"=> $data['numeroOrden'],
                 "fechaEvento"=>$data['fechaEvento'],
@@ -75,7 +87,7 @@ class OrdenAppService implements IOrdenAppService{
                 "iva"=>$data['iva'],
                 "impuestoConsumo"=>$data['impuestoConsumo'],
                 "total"=>$data['total'],
-                "estado"=>"A",
+                "estado"=>$data['estado'],
             ]);
             $orden= $this->repository->update($id,$datos);
             /*if($orden->id>0){
@@ -167,6 +179,18 @@ class OrdenAppService implements IOrdenAppService{
         } catch (\Throwable $th) {
             throw $th;
         }
+    }
+
+    public function findByNumeroOrdenSalon($numeroOrden){
+        return $this->serviceSalon->findByNumeroOrden($numeroOrden);
+    }
+
+    public function findByNumeroOrdenServicios($numeroOrden){
+        return $this->serviceServicio->findByNumeroOrden($numeroOrden);
+    }
+
+    public function findByNumeroOrdenOtrosServicios($numeroOrden){
+        return $this->serviceOtro->findByNumeroOrden($numeroOrden);
     }
    
 }

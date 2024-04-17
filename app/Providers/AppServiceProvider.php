@@ -43,6 +43,16 @@ use App\Services\Cliente\IClienteAppService;
 use App\Repositories\ClienteRepo\ClienteRepo;
 use App\Repositories\ClienteRepo\IClienteRepo;
 
+use App\Services\Factura\IFacturaAppService;
+use App\Repositories\FacturaRepo\IFacturaRepo;
+use App\Services\Factura\FacturaAppService;
+use App\Repositories\FacturaRepo\FacturaRepo;
+
+use App\Services\Factura\Configuracion\IFacturaConfiguracionAppService;
+use App\Repositories\FacturaRepo\Configuracion\IFacturaConfiguracionRepo;
+use App\Services\Factura\Configuracion\FacturaConfiguracionAppService;
+use App\Repositories\FacturaRepo\Configuracion\FacturaConfiguracionRepo;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -73,6 +83,15 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(IOrdenAppService::class, OrdenAppService::class);
         $this->app->bind(IOrdenServicioRepo::class, OrdenServicioRepo::class);
+
+        $this->app->bind(IFacturaAppService::class, FacturaAppService::class);
+        $this->app->bind(IFacturaRepo::class, FacturaRepo::class);
+
+        $this->app->bind(IFacturaAppService::class, FacturaAppService::class);
+        $this->app->bind(IFacturaRepo::class, FacturaRepo::class);
+
+        $this->app->bind(IFacturaConfiguracionAppService::class, FacturaConfiguracionAppService::class);
+        $this->app->bind(IFacturaConfiguracionRepo::class, FacturaConfiguracionRepo::class);
 
     }
 

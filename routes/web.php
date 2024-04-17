@@ -5,6 +5,8 @@ use App\Http\Controllers\SalonesController;
 use App\Http\Controllers\ServiController;
 use App\Http\Controllers\ServiciosOtrosController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\FacturaController;
+use App\Http\Controllers\FacturaConfiguracionController;
 
 use App\Http\Controllers\ReservaController;
 use Illuminate\Support\Facades\Route;
@@ -35,6 +37,7 @@ Route::post('/guardarCliente', [ClienteController::class, 'guardarCliente'])->na
 Route::put('/actualizarCliente', [ClienteController::class, 'actualizarCliente'])->name('actualizarCliente');
 Route::get('/getCliente', [ClienteController::class, 'getCliente'])->name('getCliente');
 Route::get('/getClienteByNombre/{nombre}', [ClienteController::class, 'getClienteByNombre'])->name('getClienteByNombre');
+Route::get('/getClienteById/{id}', [ClienteController::class, 'getClienteById'])->name('getClienteById');
 Route::get('/getClienteByDocumento/{tipo}/{documento}', [ClienteController::class, 'getClienteByDocumento'])->name('getClienteByDocumento');
 
 
@@ -54,3 +57,17 @@ Route::delete('/deleteOtrServicio/{id}', [ServiciosOtrosController::class, 'dele
 
 Route::get('/reserva', [ReservaController::class, 'reservaSalon'])->name('topbar.Reserva');
 Route::post('/guardarOrden', [ReservaController::class, 'guardarOrden'])->name('guardarOrden');
+Route::get('/buscarOrden/{numeroOrden}', [ReservaController::class, 'buscarOrden'])->name('buscarOrden');
+
+Route::get('/factura', [FacturaController::class, 'index'])->name('factura');
+Route::post('/guardarFactura', [FacturaController::class, 'guardarFactura'])->name('guardarFactura');
+/*Route::put('/actualizarOtroServicio', [ServiciosOtrosController::class, 'actualizarOtroServicio'])->name('actualizar');
+Route::get('/buscarOtroServicios', [ServiciosOtrosController::class, 'buscarOtroServicios'])->name('buscar');
+Route::get('/getOtroServicio/{nombre}', [ServiciosOtrosController::class, 'getOtroServicio'])->name('getServicio');
+Route::delete('/deleteOtrServicio/{id}', [ServiciosOtrosController::class, 'deleteOtrServicio'])->name('deleteServicio');*/
+
+Route::get('/factura-configuracion', [FacturaConfiguracionController::class, 'index'])->name('factura.configuracion');
+Route::post('/guardarFacturaConfiguracion', [FacturaConfiguracionController::class, 'guardarFacturaConfiguracion'])->name('guardarFacturaConfiguracion');
+Route::put('/actualizarFacturaConfiguracion', [FacturaConfiguracionController::class, 'actualizarFacturaConfiguracion'])->name('actualizarFacturaConfiguracion');
+Route::get('/buscarResoluciones', [FacturaConfiguracionController::class, 'buscarResoluciones'])->name('buscarResoluciones');
+Route::get('/getResolucion/{estado}', [FacturaConfiguracionController::class, 'getResolucion'])->name('getResolucion');

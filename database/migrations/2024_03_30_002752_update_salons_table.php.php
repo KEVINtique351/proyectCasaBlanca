@@ -15,6 +15,8 @@ return new class extends Migration
             
             $table->string('nombre');
             $table->decimal('valor');
+
+            
            
         });
     }

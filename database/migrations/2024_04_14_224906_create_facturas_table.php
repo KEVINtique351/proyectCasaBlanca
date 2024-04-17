@@ -11,24 +11,30 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reservaciones', function (Blueprint $table) {
+        Schema::create('facturas', function (Blueprint $table) {
             $table->id();
-            $table->String('numeroOrden');
-            $table->timestamp('fechaEvento');
+            $table->timestamps();
+
+            $table->String('facturaVenta');
+            $table->timestamp('fechaFactura');
             $table->unsignedBigInteger('idCliente'); // Clave foránea para la relación con la tabla 'clientes'
             $table->unsignedBigInteger('idUsuario');
-            // Otras columnas
+
+            $table->unsignedBigInteger('idOrdenServicio');
+
             $table->decimal('subTotal', 10, 2);
             $table->decimal('deposito', 10, 2);
             $table->decimal('iva', 10, 2);
             $table->decimal('impuestoConsumo', 10, 2);
             $table->decimal('total', 10, 2);
-            $table->boolean('estado');
-            $table->timestamps();//0:cancelado,1:orden activa,2:orden facturado
+            $table->char('estado');//F:facturado,P:pendiente,C:cancelado
+            $table->char('medioPago');//E:efectivo,TC:tajeta de credito,TD:tajerta debito,TF:transferencia,B:bitcoin
+            $table->decimal('valorPagado', 10, 2);
+            $table->decimal('valorCambio', 10, 2);
 
             $table->foreign('idCliente')->references('id')->on('clientes')->onDelete('cascade');
             $table->foreign('idUsuario')->references('id')->on('users')->onDelete('cascade');
-      
+            $table->foreign('idOrdenServicio')->references('id')->on('reservaciones')->onDelete('cascade');
         });
     }
 
@@ -37,6 +43,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reservaciones');
+        Schema::dropIfExists('facturas');
     }
 };

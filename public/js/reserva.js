@@ -654,7 +654,8 @@ function guardarOrden(){
         total: TotalOden,
         detalleSalon: salonesOrden,
         detalleServicio: seriviciosOrden,
-        detalleOtro: otrosOrden
+        detalleOtro: otrosOrden,
+        estado:1
     };
     //console.log(currentUser);
     console.log(data)

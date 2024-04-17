@@ -1,38 +1,37 @@
 <?php
 
-namespace App\Repositories\OrdenServicio;
+namespace App\Repositories\FacturaRepo\Configuracion;
 use Illuminate\Support\Facades\Log;
 
-use App\Models\reservaciones;
+use App\Models\factura_configuracion;
 
-class OrdenServicioRepo implements IOrdenServicioRepo{
+class FacturaConfiguracionRepo implements IFacturaConfiguracionRepo{
     
     public function all()
     {
-        return reservaciones::all();
+        return factura_configuracion::all();
     }
 
     public function find($id)
     {
-        return reservaciones::find($id);
+        return factura_configuracion::find($id);
     }
 
-    public function findByNumeroOrden($numeroOrden)
+    public function findByEstado($estado)
     {
-        return reservaciones::where('numeroOrden', '=', $numeroOrden )->get();
+        return factura_configuracion::where('estado', '=',  $estado)->get();
     }
 
-    
     public function create(array $data)
     {
-        return reservaciones::create($data);
+        return factura_configuracion::create($data);
     }
 
     public function update($id, array $data)
     {
         try {
             Log::error('act.'.$id);
-            $servicio = reservaciones::find($id);
+            $servicio = factura_configuracion::find($id);
             $servicio->update($data);
             return $servicio;
         } catch (\Throwable $th) {

@@ -3,16 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Services\Cliente\IClienteAppService;
+use App\Services\Factura\Configuracion\IFacturaConfiguracionAppService;
 use Illuminate\Http\Request;
 
-class ClienteController extends Controller
+class FacturaConfiguracionController extends Controller
 {
     protected $service;
     
-    public function __construct(IClienteAppService $clienteService)
+    public function __construct(IFacturaConfiguracionAppService $facturaConfiguracionService)
     {
-        $this->service = $clienteService;
+        $this->service = $facturaConfiguracionService;
     }
 
     public function index()
@@ -22,10 +22,10 @@ class ClienteController extends Controller
         }
 	
 	    // Si no está logado le mostramos la vista con el formulario de login
-        return view('cliente.cliente');
+        return view('factura.configuracion');
     }
 
-    public function getCliente(){
+    public function buscarResoluciones(){
         if (!auth()->check()) {
             $respuesta= array([
                 "data"=> null,
@@ -47,7 +47,7 @@ class ClienteController extends Controller
         }
     }
 
-    public function getClienteById(Request $request){
+    public function getResolucion(Request $request){
         if (!auth()->check()) {
             $respuesta= array([
                 "data"=> null,
@@ -57,8 +57,8 @@ class ClienteController extends Controller
             return response()->json($respuesta,500); 
         }
         try {
-            $id = $request->route('id');
-            $data=$this->service->getById($id);
+            $estado = $request->route('estado');
+            $data=$this->service->findByEstado($estado);
             $respuesta= array([
                 "data"=> $data,
                 "message"=>"succes",
@@ -70,55 +70,8 @@ class ClienteController extends Controller
         }
     }
 
-    public function getClienteByNombre(Request $request){
-        if (!auth()->check()) {
-            $respuesta= array([
-                "data"=> null,
-                "message"=>"no se puede ejecutar el proceso, debe iniciar sesión",
-                "error"=>true
-            ]);
-            return response()->json($respuesta,500); 
-        }
-        try {
-            $nombre = $request->route('nombre');
-            $data=$this->service->getByNombre($nombre);
-            $respuesta= array([
-                "data"=> $data,
-                "message"=>"succes",
-                "error"=>false
-            ]);
-            return response()->json($respuesta,200); 
-        } catch (\Throwable $th) {
-            return response()->json($th,500);
-        }
-    }
 
-    public function getClienteByDocumento(Request $request){
-        if (!auth()->check()) {
-            $respuesta= array([
-                "data"=> null,
-                "message"=>"no se puede ejecutar el proceso, debe iniciar sesión",
-                "error"=>true
-            ]);
-            return response()->json($respuesta,500); 
-        }
-        try {
-            
-            $tipo = $request->route('tipo');
-            $documento = $request->route('documento');
-            $data=$this->service->getByDocumento($tipo,$documento);
-            $respuesta= array([
-                "data"=> $data,
-                "message"=>"succes",
-                "error"=>false
-            ]);
-            return response()->json($respuesta,200); 
-        } catch (\Throwable $th) {
-            return response()->json($th,500);
-        }
-    }
-
-    public function guardarCliente(Request $request){
+    public function guardarFacturaConfiguracion(Request $request){
         if (!auth()->check()) {
             $respuesta= array([
                 "data"=> null,
@@ -129,17 +82,15 @@ class ClienteController extends Controller
         }
         try {
             $datos = $request->only([
-                'nombres',
-                'apellidos',
-                'tipoIdentificacion',
-                'identificacion',
-                'direccion',
-                'email',
-                'contacto'
+                'estado',
+                'resolucion',
+                'facturaInicia',
+                'facturaFinal',
+                'numero'
             ]);
             $data=$this->service->guardar($datos);
             $respuesta= array([
-                "data"=> $datos,
+                "data"=> $data,
                 "message"=>"succes",
                 "error"=>false
             ]);
@@ -154,7 +105,7 @@ class ClienteController extends Controller
         }
     }
 
-    public function actualizarCliente(Request $request){
+    public function actualizarFacturaConfiguracion(Request $request){
         if (!auth()->check()) {
             $respuesta= array([
                 "data"=> null,
@@ -167,13 +118,11 @@ class ClienteController extends Controller
             $id=$request->input('id');
             
             $datos = $request->only([
-                'nombres',
-                'apellidos',
-                'tipoIdentificacion',
-                'identificacion',
-                'direccion',
-                'email',
-                'contacto'
+                'estado',
+                'resolucion',
+                'facturaInicia',
+                'facturaFinal',
+                'numero'
             ]);
             $data=$this->service->actualizar($id,$datos);
             $respuesta= array([
